@@ -1,4 +1,4 @@
-module apis
+module WordleServer
 
 go 1.18
 
