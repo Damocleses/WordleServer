@@ -25,6 +25,7 @@ func (api WordleApi) GetAllWords(w http.ResponseWriter, _ *http.Request, _ httpr
 	api.SetupCORS(&w)
 	res, _ := json.Marshal(result)
 	resStr := string(res)
+	fmt.Println(w.Header().Get("Access-Control-Allow-Origin"))
 	fmt.Fprint(w, resStr)
 }
 
