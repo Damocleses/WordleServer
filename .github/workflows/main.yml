@@ -33,3 +33,16 @@ jobs:
         with:
           push: true
           tags: damocleses/wordle-server:v2
+      - name: SSH Action
+        uses: invi5H/ssh-action@v1.0.0
+        with:
+          NAME: tencent
+          SSH_USER: root
+          SSH_HOST: ${{ secrets.HOST }}
+          SSH_KEY: ${{ secrets.HOST_SSH_KEY }}
+          script: |
+            docker container stop wordle-server
+            docker conttainer rm wordle-server
+            docker pull damocleses/wordle-server:v2
+            docker run -d --name wordler-server -p 7767:7767 damocleses/wordler-server:v2
+            
