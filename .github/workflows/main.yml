@@ -34,4 +34,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: damocleses/wordleServer:v2
+          tags: damocleses/wordle-server:v2
