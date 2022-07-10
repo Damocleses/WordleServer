@@ -31,7 +31,5 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v3.0.0
         with:
-          context: .
-          file: ./Dockerfile
           push: true
           tags: damocleses/wordle-server:v2
