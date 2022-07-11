@@ -7,14 +7,8 @@ jobs:
   test:
     runs-on: self-hosted
     steps:
-      - name: read file
-        id: file
-        uses: komorebitech/read-files-action@v1.5
-        with:
-          files: '["/main.go"]'
-          pattern: 'package'
-      - name: output
-        run: |
-          echo "output: ${{ steps.file.outputs.content }}"
+      - id: get_version
+        uses: battila7/get-version-action@v2
+      - run: echo ${{ steps.get_version.outputs.version }}
+      - run: echo ${{ steps.get_version.outputs.version-without-v }}
      
-        
