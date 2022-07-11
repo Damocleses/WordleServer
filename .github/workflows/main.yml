@@ -9,10 +9,9 @@ jobs:
     steps:
       - name: read file
         id: file
-        uses: juliangruber/read-file-action@v1.1.4
+        uses: komorebitech/read-files-action@v1.5
         with:
-          context: .
-          path: main.go
+          files: '["/main.go"]'
       - name: output
         run: |
           echo "output: {{ steps.file.outputs.content }}"
