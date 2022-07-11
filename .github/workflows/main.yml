@@ -11,7 +11,7 @@ jobs:
         id: container_exits
         run: echo '::set-output name=container::$((echo docker container ls --format "{{.Names}}" | sed -n "/mysql/p"))'
       - name: remove container
-        if: ${{ steps.container_exits.outputs.container }} == 'wordle-server'
+        if: ${{ steps.container_exits.outputs.container == 'wordle-server' }}
         run: |
           echo '${{ steps.container_exits.outputs.container }}'
           docker container stop wordle-server
