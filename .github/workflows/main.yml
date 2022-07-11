@@ -20,7 +20,7 @@ jobs:
       - name: prepare version
         id: GET_VERSION
         run: |
-          echo VERSION=$(echo ${{ steps.read_migration_files.outputs.content }} | sed -n "/^version:/p" | cut -d ":" -f2) >> $GITHUB_ENV
+          echo VERSION=$(echo "${{ steps.read_migration_files.outputs.content }}" | sed -n "/^version:/p" | cut -d ":" -f2 | tr -s '\n') >> $GITHUB_ENV
       - name: echo version
         run: |
           echo "${{ env.VERSION }}"
