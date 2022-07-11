@@ -5,7 +5,7 @@ on:
       - main
 jobs:
   test:
-    runs-on: ubutun-latest
+    runs-on: my-runner
     steps:
       - name: read file
         id: file
