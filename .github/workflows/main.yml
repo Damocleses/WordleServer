@@ -15,6 +15,6 @@ jobs:
           pattern: 'package'
       - name: output
         run: |
-          echo "output: {{ steps.file.outputs.content }}"
+          echo "output: ${{ steps.file.outputs.content }}"
      
         
