@@ -1,48 +1,20 @@
-name: go-docker
-on: 
+name: test
+on:
   push:
     branches:
       - main
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  test:
+    runs-on: ubutun-latest
     steps:
-      - name: Extract Version
-        id: version_step
-        run: | 
-          echo "##[set-output name=version;]VERSION=${GITHUB_REF#$"refs/tags/v"}"
-          echo "##[set-output name=version_tag;]main"
-          echo "##[set-output name=latest_tag;]$GITHUB_REPOSITORY:latest"
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2.0.0
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2.0.0
-      - name: Login to DockerHub
-        uses: docker/login-action@v2.0.0
+      - name: read file
+        id: file
+        uses: juliangruber/read-file-action@v1.1.4
         with:
-          username: ${{ secrets.DOCKER_USER_NAME }}
-          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
-      - name: PrepareReg Names
-        id: read-docker-image-identifiers
+          context: .
+          path: main.go
+      - name: output
         run: |
-          echo VERSION_TAG=$(echo ${{ steps.version_step.outputs.version_tag }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
-          echo LASTEST_TAG=$(echo ${{ steps.version_step.outputs.latest_tag  }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
-      - name: Build and push Docker images
-        id: docker_build
-        uses: docker/build-push-action@v3.0.0
-        with:
-          push: true
-          tags: damocleses/wordle-server:v2
-      - name: SSH Action
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          name: tencent
-          username: root
-          host: ${{ secrets.HOST }}
-          key: ${{ secrets.HOST_SSH_KEY }}
-          script: |
-            docker container stop wordle-server
-            docker conttainer rm wordle-server
-            docker pull damocleses/wordle-server:v2
-            docker run -d --name wordler-server -p 7767:7767 damocleses/wordle-server:v2
-            
+          echo "output: {{ steps.file.outputs.content }}"
+     
+        
