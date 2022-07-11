@@ -39,6 +39,7 @@ jobs:
       - name: remove container
         if: ${{ steps.container_exits.outputs.container }} == 'wordle-server'
         run: |
+          echo "${{ steps.container_exits.outputs.container }}"
           docker container stop wordle-server
           docker container rm wordle-server
       - name: Deploy
