@@ -4,7 +4,7 @@ on:
     branches:
       - main
     pathes:
-      - 'version.txt'
+      - 'version.txt1'
       - 'package.json'
 jobs:
   test:
