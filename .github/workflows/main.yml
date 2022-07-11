@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+    pathes:
+      - 'version.txt'
+      - 'package.json'
 jobs:
   test:
     runs-on: self-hosted
