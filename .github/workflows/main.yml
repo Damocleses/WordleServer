@@ -15,7 +15,7 @@ jobs:
         uses: komorebitech/read-files-action@v1.5
         with:
           files: '["/version.txt"]'
-          pattern: '/^version:/'
+          pattern: 'version:'
       - name: echo version
         run: |
           echo "${{ steps.read_version_file.outputs.content }}"
