@@ -4,8 +4,8 @@ on:
     branches:
       - main
     paths:
-      - 'version.txt1'
-      - 'package.json1'
+      - 'version.txt'
+      - 'package.json'
 jobs:
   test:
     runs-on: self-hosted
