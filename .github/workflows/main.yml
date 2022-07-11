@@ -42,7 +42,7 @@ jobs:
           key: ${{ secrets.HOST_SSH_KEY }}
           script: |
             docker container stop wordle-server
-            docker conttainer rm wordle-server
+            docker container rm wordle-server
             docker pull damocleses/wordle-server:${{ env.VERSION }}
             docker run -d --name wordler-server -p 7767:7767 damocleses/wordle-server:${{ env.VERSION }}
             
