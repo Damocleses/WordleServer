@@ -9,11 +9,11 @@ jobs:
     steps:
       - name: check container exists
         id: container_exits
-        run: echo '::set-output name=container::$((echo docker container ls --format "{{.Names}}" | sed -n "/wordle-server/p"))'
+        run: echo '::set-output name=container::$((echo docker container ls --format "{{.Names}}" | sed -n "/mysql/p"))'
       - name: remove container
         if: ${{ steps.container_exits.outputs.container }} == 'wordle-server'
         run: |
-          echo "${{ steps.container_exits.outputs.container }}"
+          echo '${{ steps.container_exits.outputs.container }}'
           docker container stop wordle-server
           docker container rm wordle-server
       - name: Deploy
