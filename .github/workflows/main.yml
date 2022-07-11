@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - version.txt
 jobs:
   deploy:
     runs-on: ubuntu-latest
