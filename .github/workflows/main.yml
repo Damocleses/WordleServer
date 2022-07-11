@@ -19,4 +19,4 @@ jobs:
           pattern: 'version'
       - name: echo version
         run: |
-          echo "${{ steps.read_migration_files.outputs.content }}"
+          echo "${{ steps.read_migration_files.outputs.content }}" | sed -n "/^version:/p"
