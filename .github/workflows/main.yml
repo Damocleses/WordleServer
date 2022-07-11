@@ -34,15 +34,10 @@ jobs:
           push: true
           tags: damocleses/wordle-server:${{ env.VERSION }}
       - name: SSH Action
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          name: tencent
-          username: root
-          host: ${{ secrets.HOST }}
-          key: ${{ secrets.HOST_SSH_KEY }}
-          script: |
-            docker container stop wordle-server
-            docker container rm wordle-server
-            docker pull damocleses/wordle-server:${{ env.VERSION }}
-            docker run -d --name wordler-server -p 7767:7767 damocleses/wordle-server:${{ env.VERSION }}
+        run: |
+          docker container stop wordle-server
+          docker container rm wordle-server
+          docker pull damocleses/wordle-server:${{ env.VERSION }}
+          docker run -d --name wordle-server -p 7767:7767 damocleses/wordle-server:${{ env.VERSION }}
+            
             
