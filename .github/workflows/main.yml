@@ -7,8 +7,12 @@ jobs:
   test:
     runs-on: self-hosted
     steps:
-      - id: get_version
-        uses: battila7/get-version-action@v2
-      - run: echo ${{ steps.get_version.outputs.version }}
-      - run: echo ${{ steps.get_version.outputs.version-without-v }}
-     
+      - name: Read Version File
+      - id: read_version_file
+        uses: komorebitech/read-files-action@v1.5
+        with:
+          files: '["./version.txt"]'
+          pattern: '/^version:/'
+      - name: echo version
+        run: |
+          echo "${{ steps.read_version_file.outputs.content }}"
