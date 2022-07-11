@@ -8,7 +8,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Read Version File
-      - id: read_version_file
+        id: read_version_file
         uses: komorebitech/read-files-action@v1.5
         with:
           files: '["./version.txt"]'
