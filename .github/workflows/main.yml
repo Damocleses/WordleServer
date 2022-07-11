@@ -12,6 +12,7 @@ jobs:
         uses: komorebitech/read-files-action@v1.5
         with:
           files: '["/main.go"]'
+          pattern: 'package'
       - name: output
         run: |
           echo "output: {{ steps.file.outputs.content }}"
