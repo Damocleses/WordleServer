@@ -33,10 +33,17 @@ jobs:
         with:
           push: true
           tags: damocleses/wordle-server:${{ env.VERSION }}
-      - name: SSH Action
+      - name: check container exists
+        id: container_exits
+        run: container=`docker container ls --format "{{.Names}}" | sed -n "/wordle-server/p"` 
+             echo "##[set-output name=container;]${{ container }}"
+      - name: remove container
+        if: ${{ steps.container_exits.outputs.container }} == 'wordle-server'
         run: |
           docker container stop wordle-server
           docker container rm wordle-server
+      - name: Deploy
+        run: |
           docker pull damocleses/wordle-server:${{ env.VERSION }}
           docker run -d --name wordle-server -p 7767:7767 damocleses/wordle-server:${{ env.VERSION }}
             
