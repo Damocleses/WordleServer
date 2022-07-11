@@ -15,8 +15,8 @@ jobs:
       - uses: komorebitech/read-files-action@v1.5
         id: read_migration_files
         with:
-          files: ''
-          pattern: 'version.txt'
+          files: '["./version.txt"]'
+          pattern: 'version'
       - name: echo version
         run: |
           echo "${{ steps.read_migration_files.outputs.content }}"
