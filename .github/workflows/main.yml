@@ -11,7 +11,7 @@ jobs:
         id: read_version_file
         uses: komorebitech/read-files-action@v1.5
         with:
-          files: '["./version.txt"]'
+          files: '["/version.txt"]'
           pattern: '/^version:/'
       - name: echo version
         run: |
