@@ -12,10 +12,9 @@ jobs:
     steps:
       - name: Read Version File
         id: read_version_file
-        uses: komorebitech/read-files-action@v1.5
+        uses: juliangruber/read-file-action@v1
         with:
-          files: '["/version.txt"]'
-          pattern: 'version:'
+          path: ./package.json
       - name: echo version
         run: |
           echo "${{ steps.read_version_file.outputs.content }}"
