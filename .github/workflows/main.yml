@@ -31,7 +31,7 @@ jobs:
       - name: echo container_exits
         run: echo ${{ env.CONTAINER }}
       - name: remove container
-        if: ${{ env.CONTAINER }} == "wordle-server"
+        if: 1 == 2
         run: |
           docker container stop wordle-server
           docker container rm wordle-server
