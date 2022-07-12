@@ -14,7 +14,7 @@ ADD go.mod .
 ADD go.sum .
 RUN go mod download
 COPY . .
-RUN go build -ldflags="-X 'main.version=${VERSION}'" -o /app/main main.go
+RUN go build -ldflags="-s -w" -o /app/main main.go
 
 
 FROM scratch
