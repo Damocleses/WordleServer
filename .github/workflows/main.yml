@@ -37,11 +37,11 @@ jobs:
           tags: damocleses/wordle-server:${{ env.VERSION }}
       - name: check container exists
         id: container_exits
-        run: echo '::set-output name=container::$((echo docker container ls --format "{{.Names}}" | sed -n "/wordle-server/p"))'
+        run: echo '::set-output name=container::docker container ls --format "{{.Names}}" | sed -n "/wordle-server/p"'
       - name: echo container_exits
-        run: echo '${{steps.container_exits.outputs.container }}'
+        run: ${{steps.container_exits.outputs.container }}
       - name: remove container
-        if: (echo '${{ steps.container_exits.outputs.container }}') == "wordle-server"
+        if: ${{ steps.container_exits.outputs.container }} == "wordle-server"
         run: |
           docker container stop wordle-server
           docker container rm wordle-server
