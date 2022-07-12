@@ -38,6 +38,8 @@ jobs:
       - name: check container exists
         id: container_exits
         run: echo '::set-output name=container::$((echo docker container ls --format "{{.Names}}" | sed -n "/wordle-server/p"))'
+      - name: echo container_exits
+        run: echo ${{steps.container_exits.outputs.container }}
       - name: remove container
         if: ${{ steps.container_exits.outputs.container == 'wordle-server' }}
         run: |
@@ -45,6 +47,8 @@ jobs:
           docker container rm wordle-server
       - name: Deploy
         run: |
+          docker container stop wordle-server
+          docker container rm wordle-server
           docker pull damocleses/wordle-server:${{ env.VERSION }}
           docker run -d --name wordle-server -p 7767:7767 damocleses/wordle-server:${{ env.VERSION }}
             
